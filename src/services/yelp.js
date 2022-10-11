@@ -1,4 +1,4 @@
-export async function fetchBusinesses(zip = '93117', search = '') {
+export async function fetchBusinesses(zip = '97031', search = '') {
   const params = new URLSearchParams();
   params.set('zip', zip);
   params.set('search', search);

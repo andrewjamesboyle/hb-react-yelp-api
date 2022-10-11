@@ -10,8 +10,6 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
 
-  // TODO -- add state for zip / search and add event listeners to the inputs
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBusinesses('/.netlify/functions/yelp');
@@ -22,7 +20,7 @@ function App() {
   }, []);
 
   const searchRestaurants = async () => {
-    const resp = await fetchBusinesses(`/.netlify/functions/yelp?zip=${zip}`);
+    const resp = await fetchBusinesses({ zip, search });
     const data = await resp.json();
     setRestaurants(data);
     setLoading(false);
@@ -44,12 +42,12 @@ function App() {
           <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         <button onClick={searchRestaurants}>Search</button>
-        {restaurants.map((restaurant) => (
-          <div key={restaurant.id}>{restaurant.name}</div>
-        ))}
       </div>
       {loading && <div className="loader"></div>}
       {!loading && businesses.map((b) => <RestaurantListItem key={b.id} {...b} />)}
+      {restaurants.map((restaurant) => (
+        <div key={restaurant.id}>{restaurant.name}</div>
+      ))}
     </div>
   );
 }
