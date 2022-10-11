@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   const searchRestaurants = async () => {
-    const resp = await fetch(`/.netlify/functions/yelp?zip=${zip}`);
+    const resp = await fetchBusinesses(`/.netlify/functions/yelp?zip=${zip}`);
     const data = await resp.json();
     setRestaurants(data);
     setLoading(false);
