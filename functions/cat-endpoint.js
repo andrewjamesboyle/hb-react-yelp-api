@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = require('cross-fetch');
 require('dotenv').config();
 
 const headers = {
