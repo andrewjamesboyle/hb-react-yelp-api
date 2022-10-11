@@ -12,13 +12,13 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchBusinesses('/.netlify/functions/yelp');
+      const data = await fetchBusinesses(zip, search);
       console.log('data', data);
       setBusinesses(data);
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [zip, search]);
 
   const searchRestaurants = async () => {
     const resp = await fetchBusinesses(`/.netlify/functions/yelp?zip=${zip}`);
