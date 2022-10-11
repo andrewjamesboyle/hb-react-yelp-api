@@ -1,7 +1,13 @@
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 require('dotenv').config({ path: `.env.development.local` });
 
-const handler = async (event) => {
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+};
+
+exports.handler = async (event) => {
   // add code here to fetch data from yelp API
   // be sure to include the parameters from event.queryStringParameters
   const zip = event.queryStringParameters.zip;
@@ -28,4 +34,4 @@ const handler = async (event) => {
   }
 };
 
-module.exports = { handler };
+// module.exports = { handler };

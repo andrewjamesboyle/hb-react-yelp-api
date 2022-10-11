@@ -7,12 +7,13 @@ function App() {
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [zip, setZip] = useState('97031');
-  const [restaurants, setRestaurants] = useState([]);
+  // const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBusinesses('/.netlify/functions/yelp');
+      console.log('data', data);
       setBusinesses(data);
       setLoading(false);
     };
@@ -20,9 +21,9 @@ function App() {
   }, []);
 
   const searchRestaurants = async () => {
-    const resp = await fetchBusinesses({ zip, search });
+    const resp = await fetchBusinesses(`/.netlify/functions/yelp?zip=${zip}`);
     const data = await resp.json();
-    setRestaurants(data);
+    setBusinesses(data);
     setLoading(false);
     // call the API with the zip
     // set the restaurants in state
@@ -45,9 +46,9 @@ function App() {
       </div>
       {loading && <div className="loader"></div>}
       {!loading && businesses.map((b) => <RestaurantListItem key={b.id} {...b} />)}
-      {restaurants.map((restaurant) => (
+      {/* {restaurants.map((restaurant) => (
         <div key={restaurant.id}>{restaurant.name}</div>
-      ))}
+      ))} */}
     </div>
   );
 }
