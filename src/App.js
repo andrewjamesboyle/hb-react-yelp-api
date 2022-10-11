@@ -7,13 +7,11 @@ function App() {
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [zip, setZip] = useState('97031');
-  // const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBusinesses(zip, search);
-      console.log('data', data);
       setBusinesses(data);
       setLoading(false);
     };
@@ -25,10 +23,7 @@ function App() {
     const data = await resp.json();
     setBusinesses(data);
     setLoading(false);
-    // call the API with the zip
-    // set the restaurants in state
   };
-  // TODO -- add event for button click to handle calling fetchBusinesses with zip / search
 
   return (
     <div className="App">
@@ -46,9 +41,6 @@ function App() {
       </div>
       {loading && <div className="loader"></div>}
       {!loading && businesses.map((b) => <RestaurantListItem key={b.id} {...b} />)}
-      {/* {restaurants.map((restaurant) => (
-        <div key={restaurant.id}>{restaurant.name}</div>
-      ))} */}
     </div>
   );
 }

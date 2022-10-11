@@ -18,6 +18,7 @@ exports.handler = async (event, context) => {
       body: json
     };
   } catch (error) {
+    // es-lint-disable-next-line no-console
     console.log(error);
     return {
       statusCode: 500,
